@@ -1,0 +1,21 @@
+{
+	"Version": 1,
+	"DeploymentId": "",
+	"ServerDescription_Persistent":
+	{
+		"PersistentServerId": "",
+		"InviteCode": "changeme",
+		"IsPasswordProtected": false,
+		"Password": "",
+		"ServerName": "Windrose Server",
+		"WorldIslandId": "",
+		"MaxPlayerCount": 4,
+		"UserSelectedRegion": "",
+		"P2pProxyAddress": "127.0.0.1",
+		"UseDirectConnection": false,
+		"DirectConnectionServerAddress": "",
+		"DirectConnectionServerPort": 7777,
+		"DirectConnectionProxyAddress": "0.0.0.0",
+		"AutoLoadLatestBackupIfHasBroken": true
+	}
+}

@@ -1,0 +1,27 @@
+services:
+  windrose:
+    image: rhavinx/windrose:latest
+    container_name: windrose
+    stop_grace_period: 30s
+    environment:
+      TZ: "America/Denver"
+      # PUID: "1000"
+      # PGID: "1000"
+      SKIP_UPDATE: "0"
+      SERVER_NAME: "Scallywag's Paradise"
+      INVITE_CODE: "dc36e3b0"
+      SERVER_PASSWORD: "wwdd123"
+      # IS_PASSWORD_PROTECTED: "false"
+      MAX_PLAYERS: "3"
+      GAME_PORT: "7777"
+      # USE_DIRECT_CONNECTION: "true"
+      # REGION: ""
+      # P2P_PROXY_ADDRESS: "127.0.0.1"
+      # REMOVE_SERVER_FILES: "0"
+    volumes:
+      - /skye/data/windrose/server:/home/steam/windrose/server
+      - /skye/data/windrose/data:/home/steam/windrose/data
+    ports:
+      - "7777:7777/udp"
+      - "7777:7777/tcp"
+    restart: unless-stopped
