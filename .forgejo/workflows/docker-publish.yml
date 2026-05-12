@@ -4,8 +4,15 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'Dockerfile'
+      - 'start.sh'
+      - 'ServerDescription.json'
     tags:
       - 'v*'
+  schedule:
+    - cron: '0 3 1 * *'  # 1st of every month at 03:00 UTC — pulls latest base packages
+  workflow_dispatch:
 
 jobs:
   build-and-push:
