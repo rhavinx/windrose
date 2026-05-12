@@ -20,6 +20,7 @@ RUN dpkg --add-architecture i386 && \
         curl \
         unzip \
         xvfb \
+        xauth \
         winbind \
         gosu \
         jq \
