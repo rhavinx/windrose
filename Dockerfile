@@ -1,10 +1,14 @@
-FROM --platform=linux/amd64 debian:trixie-slim
+FROM debian:trixie-slim
 
 LABEL org.opencontainers.image.authors="RhavinX"
 LABEL org.opencontainers.image.source="https://git.riyria.xyz/rhavin/windrose"
 LABEL org.opencontainers.image.description="Windrose Dedicated Server"
 
 ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
 
 ADD --chmod=755 https://dl.winehq.org/wine-builds/winehq.key /etc/apt/keyrings/winehq-archive.key
 ADD https://dl.winehq.org/wine-builds/debian/dists/trixie/winehq-trixie.sources /etc/apt/sources.list.d/winehq-trixie.sources
