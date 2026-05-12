@@ -260,8 +260,8 @@ if [[ ! -f "${SERVERHOME}/${GAMEBASE}/ServerDescription.json" ]]; then
     chown steam:steam "${SERVERHOME}/${GAMEBASE}/ServerDescription.json"
 fi
 
-patch_server_description
 copy_files_to_server
+patch_server_description
 
 # Wine prefix in data volume — persistent, initialized once
 export WINEPREFIX="${GAMEDATA}/.wine"
