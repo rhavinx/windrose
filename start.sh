@@ -213,6 +213,7 @@ patch_server_description() {
     cp "${tmp}" "${json_file}"
     rm -f "${tmp}" "${tmp}.new"
     chown steam:steam "${json_file}"
+    chmod 666 "${json_file}"
     echo -e "${OK}ServerDescription.json patched.${NC}"
 }
 
