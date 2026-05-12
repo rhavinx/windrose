@@ -190,6 +190,11 @@ patch_server_description() {
             '.ServerDescription_Persistent.UseDirectConnection = $v' "${tmp}" > "${tmp}.new" && \
         mv "${tmp}.new" "${tmp}"
 
+    [[ -n "${DIRECT_CONNECTION_ADDRESS}" ]] && \
+        jq --arg v "${DIRECT_CONNECTION_ADDRESS}" \
+            '.ServerDescription_Persistent.DirectConnectionServerAddress = $v' "${tmp}" > "${tmp}.new" && \
+        mv "${tmp}.new" "${tmp}"
+
     [[ -n "${GAME_PORT}" ]] && \
         jq --argjson v "${GAME_PORT}" \
             '.ServerDescription_Persistent.DirectConnectionServerPort = $v' "${tmp}" > "${tmp}.new" && \
