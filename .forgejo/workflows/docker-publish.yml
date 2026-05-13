@@ -47,5 +47,6 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           platforms: linux/amd64
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          no-cache: ${{ github.event_name == 'schedule' }}
+          cache-from: type=local,src=/skye/buildx-cache
+          cache-to: type=local,dest=/skye/buildx-cache,mode=max
