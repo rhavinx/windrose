@@ -73,6 +73,8 @@ DIRECT_CONNECTION_ADDRESS: "your.public.ip"
 
 ## Mods
 
+This container supports `.pak` mods only. Mods that require UE4SS (Unreal Engine Script System) — such as those shipped as Lua scripts or DLLs — are not supported.
+
 Place `.pak` mod files in the `~mods` directory inside the server volume:
 
 ```
