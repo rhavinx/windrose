@@ -2,7 +2,7 @@
 
 APPID=4129620
 GAMENAME="Windrose"
-README_URL="https://git.riyria.xyz/rhavin/windrose/raw/branch/main/README.md"
+README_URL="https://github.com/rhavinx/windrose/blob/main/README.md"
 
 BINARY="R5/Binaries/Win64/WindroseServer-Win64-Shipping.exe"
 GAMEBASE="R5"
