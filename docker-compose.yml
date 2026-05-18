@@ -11,6 +11,7 @@ services:
       SERVER_NAME: "My Windrose Server"
       INVITE_CODE: "changeme"
       SERVER_PASSWORD: "changeme"
+      IS_PASSWORD_PROTECTED: "true"
       MAX_PLAYERS: "4"
       GAME_PORT: "7777"
       # USE_DIRECT_CONNECTION: "true"

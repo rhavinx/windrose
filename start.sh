@@ -171,9 +171,13 @@ patch_server_description() {
             '.ServerDescription_Persistent.InviteCode = $v' "${tmp}" > "${tmp}.new" && \
         mv "${tmp}.new" "${tmp}"
 
-    if [[ -n "${SERVER_PASSWORD}" ]]; then
+    [[ -n "${SERVER_PASSWORD}" ]] && \
         jq --arg v "${SERVER_PASSWORD}" \
-            '.ServerDescription_Persistent.Password = $v | .ServerDescription_Persistent.IsPasswordProtected = true' \
+            '.ServerDescription_Persistent.Password = $v' "${tmp}" > "${tmp}.new" && \
+        mv "${tmp}.new" "${tmp}"
+
+    if [[ "${IS_PASSWORD_PROTECTED}" == "true" ]]; then
+        jq '.ServerDescription_Persistent.IsPasswordProtected = true' \
             "${tmp}" > "${tmp}.new" && mv "${tmp}.new" "${tmp}"
     elif [[ "${IS_PASSWORD_PROTECTED}" == "false" ]]; then
         jq '.ServerDescription_Persistent.IsPasswordProtected = false | .ServerDescription_Persistent.Password = ""' \

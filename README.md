@@ -112,7 +112,7 @@ If DepotDownloader gets into a bad state or you want a clean reinstall:
 | SERVER_NAME                 | Server display name | *(existing value)* |
 | INVITE_CODE                 | Invite code for lobby-based connections | *(existing value)* |
 | SERVER_PASSWORD             | Join password (also sets `IsPasswordProtected = true`) | *(existing value)* |
-| IS_PASSWORD_PROTECTED       | Set to `"false"` to explicitly disable password protection | *(existing value)* |
+| IS_PASSWORD_PROTECTED       | `"true"` enables password protection, `"false"` disables it and clears the password | *(existing value)* |
 | MAX_PLAYERS                 | Maximum player count | *(existing value)* |
 | USE_DIRECT_CONNECTION       | Enable Direct IP connection mode (`"true"`/`"false"`) | *(existing value)* |
 | DIRECT_CONNECTION_ADDRESS   | Public IP address stored for Direct IP mode (shared with game's connection service) | *(existing value)* |
@@ -134,6 +134,7 @@ services:
       SERVER_NAME: "My Windrose Server"
       INVITE_CODE: "changeme"
       SERVER_PASSWORD: "changeme"
+      IS_PASSWORD_PROTECTED: "true"
       MAX_PLAYERS: "4"
       GAME_PORT: "7777"
       # USE_DIRECT_CONNECTION: "true"
