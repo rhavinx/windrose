@@ -14,9 +14,9 @@ services:
       MAX_PLAYERS: "4"
       GAME_PORT: "7777"
       # USE_DIRECT_CONNECTION: "true"
-      # DIRECT_CONNECTION_ADDRESS: "your.public.ip"
+      # DIRECT_CONNECTION_ADDRESS: "your.public.ip"  # stored for future game use; port forward + USE_DIRECT_CONNECTION=true is what enables external connections
       # REGION: ""
-      # P2P_PROXY_ADDRESS: "127.0.0.1"
+      # P2P_PROXY_ADDRESS: ""  # defaults to 0.0.0.0 (all interfaces) — only set to override
       # REMOVE_SERVER_FILES: "0"
     volumes:
       - /path/to/server:/home/steam/windrose/server

@@ -205,10 +205,13 @@ patch_server_description() {
             '.ServerDescription_Persistent.UserSelectedRegion = $v' "${tmp}" > "${tmp}.new" && \
         mv "${tmp}.new" "${tmp}"
 
-    [[ -n "${P2P_PROXY_ADDRESS}" ]] && \
-        jq --arg v "${P2P_PROXY_ADDRESS}" \
-            '.ServerDescription_Persistent.P2pProxyAddress = $v' "${tmp}" > "${tmp}.new" && \
-        mv "${tmp}.new" "${tmp}"
+    jq --arg v "${P2P_PROXY_ADDRESS:-"0.0.0.0"}" \
+        '.ServerDescription_Persistent.P2pProxyAddress = $v' "${tmp}" > "${tmp}.new" && \
+    mv "${tmp}.new" "${tmp}"
+
+    jq '.ServerDescription_Persistent.DirectConnectionProxyAddress = "0.0.0.0"' \
+        "${tmp}" > "${tmp}.new" && \
+    mv "${tmp}.new" "${tmp}"
 
     cp "${tmp}" "${json_file}"
     rm -f "${tmp}" "${tmp}.new"
