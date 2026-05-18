@@ -115,9 +115,9 @@ If DepotDownloader gets into a bad state or you want a clean reinstall:
 | IS_PASSWORD_PROTECTED       | Set to `"false"` to explicitly disable password protection | *(existing value)* |
 | MAX_PLAYERS                 | Maximum player count | *(existing value)* |
 | USE_DIRECT_CONNECTION       | Enable Direct IP connection mode (`"true"`/`"false"`) | *(existing value)* |
-| DIRECT_CONNECTION_ADDRESS   | Public IP address for Direct IP mode | *(existing value)* |
+| DIRECT_CONNECTION_ADDRESS   | Public IP address stored for Direct IP mode (shared with game's connection service) | *(existing value)* |
 | REGION                      | Connectivity server region | *(existing value)* |
-| P2P_PROXY_ADDRESS           | P2P proxy address | *(existing value)* |
+| P2P_PROXY_ADDRESS           | Binding address for P2P listening sockets — do not set to your public IP | `"0.0.0.0"` |
 | REMOVE_SERVER_FILES         | Wipe server files for a clean reinstall (set to `"1"` for one launch only) | `"0"` |
 
 ```yaml
@@ -139,7 +139,7 @@ services:
       # USE_DIRECT_CONNECTION: "true"
       # DIRECT_CONNECTION_ADDRESS: "your.public.ip"
       # REGION: ""
-      # P2P_PROXY_ADDRESS: "127.0.0.1"
+      # P2P_PROXY_ADDRESS: ""  # defaults to 0.0.0.0 — only set to override
       # REMOVE_SERVER_FILES: "0"
     volumes:
       - /path/to/server:/home/steam/windrose/server
@@ -155,8 +155,15 @@ services:
 - **R5Check warning in logs** (`Cannot save ServerDescription file`) — non-fatal. The game binary attempts to write back to `ServerDescription.json` at runtime and fails due to a Wine/filesystem interaction. The server continues running normally and all functionality is unaffected.
 - **Slow first connection** — UE5 dedicated servers take time to preload the world. Subsequent connections are faster once the server is warm.
 - **Direct IP silent failure** — see the known issue note under [Direct IP](#direct-ip) above.
+- **Game version update resets proxy fields** — after a game update, the server may reset `P2pProxyAddress` and `DirectConnectionProxyAddress` to non-Docker-friendly values on first start. These are always overridden by the container on startup, so a second restart after the update will be stable.
 
 ## Changelog
+
+* 18 May 2026:
+  - `P2pProxyAddress` now always forced to `0.0.0.0` in Docker (was only set if env var present; game resets it to `127.0.0.1` on version update which breaks external connections)
+  - `DirectConnectionProxyAddress` now always forced to `0.0.0.0` (binding address for direct connections — was never patched before)
+  - Template `ServerDescription.json` corrected: `P2pProxyAddress` fixed from `127.0.0.1` to `0.0.0.0`, `CanLaunchMultipleServerInstances` field added
+  - `P2P_PROXY_ADDRESS` env var is now an override only — do not set it to your public IP
 
 * 12 May 2026:
   - Initial release
